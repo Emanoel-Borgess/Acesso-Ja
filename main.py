@@ -1,6 +1,7 @@
 import modulo1_buscas
 import random
 import modulo2_huffman
+import modulo3_grafos
 
 
 def main():
@@ -113,6 +114,119 @@ def main():
     print("\n--- Verificação de Integridade ---")
     print(f"Textos são idênticos? {texto_original_relatos == texto_descomprimido}")
     print("==========================================================")
+
+# Atualização da main (Módulo 3)
+    print("\n==========================================================")
+    print("--- Módulo 3: O Mapa do Mundo (Grafos) ---")
+    mapa = modulo3_grafos.Grafo()
+    print("Criando locais...")
+    mapa.adicionarVertice("A: Entrada")
+    mapa.adicionarVertice("B: Praça")
+    mapa.adicionarVertice("C: Prefeitura")
+    mapa.adicionarVertice("D: Hospital")
+    print("Conectando rotas...")
+    mapa.adicionarAresta("A: Entrada", "B: Praça", 2)
+    
+    mapa.adicionarAresta("B: Praça", "C: Prefeitura", 5)
+    
+    mapa.adicionarAresta("B: Praça", "D: Hospital", 10)
+    
+    mapa.adicionarAresta("C: Prefeitura", "D: Hospital", 1)
+
+    mapa.imprimirListaAdj()
+    mapa.imprimirMatrizAdj()
+
+# Atualização da main (Entrega dia 01/12/2025)
+    print("\n--- Testando DFS (Exploração Profunda) ---")
+    print("Começando da Entrada (A)...")
+    mapa.buscaDFS("A: Entrada")
+    print("FIM")
+
+    print("\n--- Testando BFS (Exploração em Camadas) ---")
+    mapa.buscaBFS("A: Entrada")
+    print("FIM")
+
+
+    print("\n--- Testando Dijkstra (Menor Custo de Acessibilidade) ---")
+    print("Calculando melhor rota de 'A: Entrada' para 'D: Hospital'...")
+    
+    caminho, custo_total = mapa.dijkstra("A: Entrada", "D: Hospital")
+    
+    print(f"Melhor Caminho: {caminho}")
+    print(f"Custo Total de Acessibilidade: {custo_total}")
+
+# Atualização da main (Entrega dia 19/12/2025)
+    print("\n==========================================================")
+    print("--- Módulo 3: O Mapa do Mundo (Grafos) ---")
+    
+    mapa = modulo3_grafos.Grafo()
+
+    print("Criando locais...")
+    mapa.adicionarVertice("A: Entrada")
+    mapa.adicionarVertice("B: Praça")
+    mapa.adicionarVertice("C: Prefeitura")
+    mapa.adicionarVertice("D: Hospital")
+
+    print("Conectando rotas...")
+    mapa.adicionarAresta("A: Entrada", "B: Praça", 2)
+    mapa.adicionarAresta("B: Praça", "C: Prefeitura", 5)
+    mapa.adicionarAresta("B: Praça", "D: Hospital", 10)
+    mapa.adicionarAresta("C: Prefeitura", "D: Hospital", 1)
+
+    mapa.imprimirListaAdj()
+    mapa.imprimirMatrizAdj()
+
+    print("\n--- Testando DFS (Exploração Profunda) ---")
+    print("Começando da Entrada (A)...")
+    mapa.buscaDFS("A: Entrada")
+
+    print("\n--- Testando BFS (Exploração em Camadas) ---")
+    mapa.buscaBFS("A: Entrada")
+
+    print("\n--- Testando Dijkstra (Menor Custo de Acessibilidade) ---")
+    print("Calculando melhor rota de 'A: Entrada' para 'D: Hospital'...")
+    
+    caminho, custo_total = mapa.dijkstra("A: Entrada", "D: Hospital")
+    
+    print(f"Melhor Caminho: {caminho}")
+    print(f"Custo Total de Acessibilidade: {custo_total}")
+
+    print("\n==========================================================")
+    print("--- Módulo 3 (Final): Otimização Avançada ---")
+
+    print("\n[MST - Algoritmo de Borůvka] Planejando rede de reformas de menor custo total:")
+    mstArestas, custoMst = mapa.boruvkaMST()
+    
+    print(f"Custo Mínimo para conectar toda a cidade: {custoMst}")
+    print("Rotas escolhidas para reforma:")
+    for origem, destino, custo in mstArestas:
+        print(f"  - Reformar trecho {origem} <--> {destino} (Custo: {custo})")
+
+    print("\n[Coloração] Agendando manutenção para evitar bloqueios simultâneos em ruas vizinhas:")
+    agendamento = mapa.coloracaoWelchPowell()
+    for local, dia in agendamento.items():
+        print(f"  - {local}: Manutenção no Dia {dia}")
+
+    print("\n[Ordenação Topológica] Planejamento da Obra de uma Rampa:")
+    
+    projeto_obra = modulo3_grafos.Grafo()
+    projeto_obra.adicionarVertice("1. Aprovar Projeto")
+    projeto_obra.adicionarVertice("2. Comprar Material")
+    projeto_obra.adicionarVertice("3. Demolição")
+    projeto_obra.adicionarVertice("4. Construir Rampa")
+    projeto_obra.adicionarVertice("5. Pintura")
+    projeto_obra.adicionarVertice("6. Inauguração")
+
+    projeto_obra.adicionarDependencia("1. Aprovar Projeto", "2. Comprar Material") 
+    projeto_obra.adicionarDependencia("1. Aprovar Projeto", "3. Demolição")      
+    projeto_obra.adicionarDependencia("2. Comprar Material", "4. Construir Rampa")
+    projeto_obra.adicionarDependencia("3. Demolição", "4. Construir Rampa")        
+    projeto_obra.adicionarDependencia("4. Construir Rampa", "5. Pintura")
+    projeto_obra.adicionarDependencia("5. Pintura", "6. Inauguração")
+
+    ordem_execucao = projeto_obra.ordenacaoTopologica()
+    print("Ordem correta de execução da obra:")
+    print(ordem_execucao)
 
 if __name__ == "__main__":
     main()
