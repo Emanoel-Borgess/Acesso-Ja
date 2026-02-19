@@ -1,7 +1,6 @@
 import random
 
 # Busca sequêncial
-
 def busca_sequencial(lista, alvo):
     comparacoes = 0
 
@@ -12,7 +11,6 @@ def busca_sequencial(lista, alvo):
     return -1, comparacoes
 
 # Busca binária
-
 def busca_binaria(lista_ordenanda, alvo):
     comparacoes = 0
     inicio = 0
@@ -32,7 +30,6 @@ def busca_binaria(lista_ordenanda, alvo):
 
 #### Adicionando o Rabin Karp
 # Rabin Karp
-
 def rabin_karp(texto, padrao):
     n = len(texto)
     m = len(padrao)

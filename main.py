@@ -2,7 +2,7 @@ import modulo1_buscas
 import random
 import modulo2_huffman
 import modulo3_grafos
-
+import modulo4_pd
 
 def main():
 
@@ -126,17 +126,13 @@ def main():
     mapa.adicionarVertice("D: Hospital")
     print("Conectando rotas...")
     mapa.adicionarAresta("A: Entrada", "B: Praça", 2)
-    
     mapa.adicionarAresta("B: Praça", "C: Prefeitura", 5)
-    
     mapa.adicionarAresta("B: Praça", "D: Hospital", 10)
-    
     mapa.adicionarAresta("C: Prefeitura", "D: Hospital", 1)
-
     mapa.imprimirListaAdj()
     mapa.imprimirMatrizAdj()
 
-# Atualização da main (Entrega dia 01/12/2025)
+# Atualização da main
     print("\n--- Testando DFS (Exploração Profunda) ---")
     print("Começando da Entrada (A)...")
     mapa.buscaDFS("A: Entrada")
@@ -145,43 +141,6 @@ def main():
     print("\n--- Testando BFS (Exploração em Camadas) ---")
     mapa.buscaBFS("A: Entrada")
     print("FIM")
-
-
-    print("\n--- Testando Dijkstra (Menor Custo de Acessibilidade) ---")
-    print("Calculando melhor rota de 'A: Entrada' para 'D: Hospital'...")
-    
-    caminho, custo_total = mapa.dijkstra("A: Entrada", "D: Hospital")
-    
-    print(f"Melhor Caminho: {caminho}")
-    print(f"Custo Total de Acessibilidade: {custo_total}")
-
-# Atualização da main (Entrega dia 19/12/2025)
-    print("\n==========================================================")
-    print("--- Módulo 3: O Mapa do Mundo (Grafos) ---")
-    
-    mapa = modulo3_grafos.Grafo()
-
-    print("Criando locais...")
-    mapa.adicionarVertice("A: Entrada")
-    mapa.adicionarVertice("B: Praça")
-    mapa.adicionarVertice("C: Prefeitura")
-    mapa.adicionarVertice("D: Hospital")
-
-    print("Conectando rotas...")
-    mapa.adicionarAresta("A: Entrada", "B: Praça", 2)
-    mapa.adicionarAresta("B: Praça", "C: Prefeitura", 5)
-    mapa.adicionarAresta("B: Praça", "D: Hospital", 10)
-    mapa.adicionarAresta("C: Prefeitura", "D: Hospital", 1)
-
-    mapa.imprimirListaAdj()
-    mapa.imprimirMatrizAdj()
-
-    print("\n--- Testando DFS (Exploração Profunda) ---")
-    print("Começando da Entrada (A)...")
-    mapa.buscaDFS("A: Entrada")
-
-    print("\n--- Testando BFS (Exploração em Camadas) ---")
-    mapa.buscaBFS("A: Entrada")
 
     print("\n--- Testando Dijkstra (Menor Custo de Acessibilidade) ---")
     print("Calculando melhor rota de 'A: Entrada' para 'D: Hospital'...")
@@ -227,6 +186,32 @@ def main():
     ordem_execucao = projeto_obra.ordenacaoTopologica()
     print("Ordem correta de execução da obra:")
     print(ordem_execucao)
+
+# Atualização da main
+    # --- Módulo 4: Sabedoria do Guardião (Programação Dinâmica) ---
+    print("\n==========================================================")
+    print("--- Módulo 4: Sabedoria do Guardião (Programação Dinâmica) ---")
+    locais_no_mapa = mapa.vertices 
+    
+    print(f"Locais conhecidos no sistema: {locais_no_mapa}")
+
+    entrada_usuario = "Hospitla"
+    
+    print(f"\nUsuário buscou por: '{entrada_usuario}'")
+    print("Processando busca inteligente via Distância de Edição...")
+
+    sugestao, custo_operacoes = modulo4_pd.corretor_busca_inteligente(entrada_usuario, locais_no_mapa)
+
+    print("\n[Resultado da Inteligência Estratégica]")
+    if custo_operacoes == 0:
+        print(f"Local exato encontrado: {sugestao}")
+    elif custo_operacoes <= 5:
+        print(f"Não encontramos '{entrada_usuario}'. Você quis dizer '{sugestao}'?")
+        print(f"Custo de transformação (Levenshtein): {custo_operacoes} operações.")
+    else:
+        print("Nenhuma correspondência próxima encontrada.")
+        
+    print("==========================================================")
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,6 @@
 from collections import deque
 import heapq
 
-
 class Grafo:
     def __init__(self):
         self.vertices = []

@@ -1,17 +1,15 @@
-import heapq # Biblioteca nativa do Python para criar fila de prioridade.
+import heapq
 
 class No:
-    def __init__(self, caractere, frequencia): # Construtor da classe
-        self.caractere = caractere  # O caractere
-        self.frequencia = frequencia  # A frequência
-        self.esquerda = None  # O filho da esquerda (o bit '0') None significa vazio
-        self.direita = None # O filho da direita (o bit '1')
+    def __init__(self, caractere, frequencia):
+        self.caractere = caractere
+        self.frequencia = frequencia
+        self.esquerda = None
+        self.direita = None
 
-    # Ele vai ordenar pela frequência crescente
     def __lt__(self, other):
         return self.frequencia < other.frequencia
     
-# Função de comprimir
 def comprimir(texto):
     frequencias = {}
 
@@ -24,21 +22,21 @@ def comprimir(texto):
         heapq.heappush(filaDePrioridade, noAtual)
 
     while len(filaDePrioridade) > 1:
-        noEsquerdo = heapq.heappop(filaDePrioridade) # Pegando os nós mais leves
+        noEsquerdo = heapq.heappop(filaDePrioridade)
         noDireito = heapq.heappop(filaDePrioridade)
         novoNoPai = No(None, noEsquerdo.frequencia + noDireito.frequencia)
 
         novoNoPai.esquerda = noEsquerdo
         novoNoPai.direita = noDireito
 
-        heapq.heappush(filaDePrioridade, novoNoPai) # Colocando o novo nó na arvore e reordenando
+        heapq.heappush(filaDePrioridade, novoNoPai)
         
-    raizDaArvore = filaDePrioridade[0] # Minha árore completa
-    mapaArvore = {} #Mapa para guardar os códigos da arvore
+    raizDaArvore = filaDePrioridade[0]
+    mapaArvore = {}
 
     def codigoCaminhoArvore(noAtual, codigoDoCaminho, mapaCodigo):
-        if noAtual is not None: #verificando se o nó é vazio
-            if noAtual.caractere is not None: # Verificando se o nó é uma folha, ou seja, se ele tem um caractere
+        if noAtual is not None:
+            if noAtual.caractere is not None:
                 mapaCodigo[noAtual.caractere] = codigoDoCaminho
             else:
                 codigoCaminhoArvore(noAtual.esquerda, codigoDoCaminho + "0", mapaCodigo)
@@ -52,10 +50,9 @@ def comprimir(texto):
 
     return textoCodificado, raizDaArvore
 
-# Função para descomprimir o texto
 def descomprimir(textoCodificado, arvore):
     textoDescodificado = ""
-    noAtual = arvore #Ponteiro para saber em qual posição estou na árvore
+    noAtual = arvore
 
     for bit in textoCodificado:
         if bit == '0':

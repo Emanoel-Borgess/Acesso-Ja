@@ -1,7 +1,9 @@
 # Projeto: “Acesso Já: O Roteirizador Urbano Acessível”
+
 ## Aluno: Emanoel R. Borges
 
 # Fase 1 — Busca de Dados (Sequencial, Binária e Texto)
+
 ### Entrega: 04/11 e 11/11
 
 Este módulo implementa algoritmos de Busca Sequencial, Busca Binária e Busca em Texto (Rabin-Karp), adaptados ao contexto do projeto “Acesso Já”, simulando desafios reais de acessibilidade urbana.
@@ -10,7 +12,7 @@ Este módulo implementa algoritmos de Busca Sequencial, Busca Binária e Busca e
 
 - **Algoritmo:** `busca_sequencial()`
 - **Cenário no Acesso Já:** Simula a busca por um "Ponto de Interesse" (POI) específico (ex: "POI_hospital_central") dentro de uma lista de registros.
-- **Funcionamento:**  A função varre a lista, item por item (do índice 0 até o fim), contando cada comparação. Ela para assim que encontra o alvo ou chega ao fim da lista.
+- **Funcionamento:** A função varre a lista, item por item (do índice 0 até o fim), contando cada comparação. Ela para assim que encontra o alvo ou chega ao fim da lista.
 
 ## Desafio 2 — Busca Binária (Catálogos Ordenados)
 
@@ -19,6 +21,7 @@ Este módulo implementa algoritmos de Busca Sequencial, Busca Binária e Busca e
 - **Funcionamento:** A função usa a abordagem de "dividir para conquistar". Ela olha o meio da lista: se o alvo for maior, joga a metade esquerda fora; se for menor, joga a metade direita fora. Ela repete isso até encontrar o alvo ou o espaço de busca desaparecer.
 
 ## Desafio 3 — Busca em Texto (Rabin-Karp)
+
 ### Entrega: 11/11
 
 - **Algoritmo:** `rabin_karp()`
@@ -26,25 +29,31 @@ Este módulo implementa algoritmos de Busca Sequencial, Busca Binária e Busca e
 - **Funcionamento:** O algoritmo implementa um rolling hash (hash deslizante). Em vez de comparar letras, ele compara "números mágicos" (hashes) da janela de texto com o hash do padrão. Isso é muito rápido. Quando os hashes batem, ele faz uma verificação final letra por letra para evitar falsos positivos (colisões). No meu teste, ele identificou com sucesso todas as ocorrências das palavras-chave nos relatos.
 
 # Análise de Complexidade
+
 ### O programa principal (main()) demonstra a diferença de eficiência:
 
 ### Busca Sequencial (pior caso): `O(n)`
+
 - No teste, para encontrar o alvo na posição 75 de uma lista de 100 CEPs, foram necessárias 76 comparações. No pior caso, se o alvo fosse o último, seriam 100 comparações.
 
 ### Busca Binária (pior caso): `O(log n)`
+
 - Para encontrar o mesmo alvo (posição 75), a Busca Binária precisou de apenas 6 comparações. Isso prova que ela é exponencialmente mais rápida para lidar com grandes volumes de dados ordenados.
 
 ### Rabin-Karp (caso médio): `O(n + m)`
+
 - O algoritmo consegue analisar um texto de n caracteres para encontrar um padrão de m caracteres de forma muito eficiente (quase linear). É imensamente mais rápido do que uma busca por força bruta ($O(n*m)$).
 
 ---
 
 # Fase 2 — Otimização de Recursos (Compressão de Huffman)
+
 ### Entrega: 17/11
 
 Este módulo faz a implementação do algoritmo de **Compressão de Huffman**, usado para reduzir o tamanho dos relatos de usuários armazenados no sistema "AcessoJá".
 
 ## Desafio — Compressão e Descompressão Huffman
+
 - **Algoritmos:** `comprimir()` e `descomprimir()` (usando a `class No`)
 
 - **Cenário no Acesso Já:** Compactação eficiente dos "Relatos de Usuários" (do Módulo 1) para reduzir o espaço de armazenamento no servidor.
@@ -54,6 +63,7 @@ Este módulo faz a implementação do algoritmo de **Compressão de Huffman**, u
 # Análise de Complexidade e Resultados (Huffman)
 
 ### Compressão de Huffman (pior caso): `O(n + k log k)`
+
 - (Onde `n` é o tamanho do texto e `k` é o número de caracteres únicos). A eficiência vem de construir a árvore de frequência (o `heap`) de forma otimizada. Resultados da Demonstração:
 
 - **Eficiência:** O texto original dos relatos foi comprimido de **2568 bits** para **1329 bits**.
@@ -64,6 +74,7 @@ Este módulo faz a implementação do algoritmo de **Compressão de Huffman**, u
 ---
 
 # Fase 3 — Grafos ( O mapa do meu mundo)
+
 ### Entrega: 24/11
 
 Nesta fase, iniciei a implementação da estrutura de dados central do projeto "Acesso Já": o **Grafo**. Ele representa o mapa da cidade, onde os locais são vértices e as rotas são arestas com peso.
@@ -76,51 +87,56 @@ Nesta fase, iniciei a implementação da estrutura de dados central do projeto "
 ### Implementação e Funcionalidades
 
 1.  **Representação Dupla:**
-    * **Matriz de Adjacência:** Útil para verificar conexões diretas rapidamente (`O(1)`). Implementada expandindo dinamicamente linhas e colunas conforme novos locais são adicionados.
-    * **Lista de Adjacência:** Eficiente para memória em mapas grandes e esparsos.
+    - **Matriz de Adjacência:** Útil para verificar conexões diretas rapidamente (`O(1)`). Implementada expandindo dinamicamente linhas e colunas conforme novos locais são adicionados.
+    - **Lista de Adjacência:** Eficiente para memória em mapas grandes e esparsos.
 
 2.  **Manipulação do Mapa:**
-    * `adicionarVertice(nome)`: Cria um novo local e redimensiona a matriz.
-    * `adicionarAresta(origem, destino, custo)`: Cria uma rota de mão dupla entre dois locais, salvando o custo de acessibilidade em ambas as estruturas.
+    - `adicionarVertice(nome)`: Cria um novo local e redimensiona a matriz.
+    - `adicionarAresta(origem, destino, custo)`: Cria uma rota de mão dupla entre dois locais, salvando o custo de acessibilidade em ambas as estruturas.
 
 ### Resultados da Visualização (Demonstração)
 
 O sistema permite visualizar a estrutura do mapa. No teste realizado com 4 locais (Entrada, Praça, Prefeitura, Hospital):
 
-* **Lista:** Mostra claramente os vizinhos. Ex: A Praça (`B`) conecta com a Entrada (`custo 2`), Prefeitura (`custo 5`) e Hospital (`custo 10`).
-* **Matriz:** Exibe a tabela de custos completa, onde `0` indica ausência de conexão direta e os valores indicam o nível de dificuldade do trajeto.
+- **Lista:** Mostra claramente os vizinhos. Ex: A Praça (`B`) conecta com a Entrada (`custo 2`), Prefeitura (`custo 5`) e Hospital (`custo 10`).
+- **Matriz:** Exibe a tabela de custos completa, onde `0` indica ausência de conexão direta e os valores indicam o nível de dificuldade do trajeto.
 
 ## Desafio — Navegação e Caminhos Ótimos (DFS, BFS, Dijkstra)
+
 ### Entrega: 01/12
 
 Implementação dos algoritmos clássicos para percorrer o mapa e traçar rotas.
 
 ### Busca em Profundidade (DFS)
+
 - **Algoritmo:** `buscaDFS()` (Recursivo)
 - **Uso no Acesso Já:** Exploração total de uma região, verificando conexões profundas entre bairros distantes.
 - **Funcionamento:** Utiliza uma abordagem de "pilha" (via recursão) para ir o mais longe possível em um ramo antes de voltar (backtracking).
 
 ### Busca em Largura (BFS)
+
 - **Algoritmo:** `buscaBFS()` (Iterativo com Fila `deque`)
 - **Uso no Acesso Já:** Encontrar locais que estão a uma certa "distância de saltos" (ex: quais locais estão a 2 ruas daqui?), independentemente do custo da acessibilidade.
 - **Funcionamento:** Utiliza uma Fila para explorar o grafo em "camadas" ou ondas concêntricas a partir da origem.
 
 ### Algoritmo de Dijkstra (O Roteirizador)
+
 - **Algoritmo:** `dijkstra()` (Com Fila de Prioridade `heapq`)
 - **Uso no Acesso Já:** **Funcionalidade Principal.** Encontra a rota mais acessível (menor custo total) entre dois pontos, evitando rotas com barreiras (peso alto) em favor de rotas adaptadas (peso baixo).
-- **Funcionamento:** Mantém uma tabela de custos mínimos e usa um *Min-Heap* para expandir sempre o caminho mais promissor. Reconstrói o caminho final voltando do destino à origem.
+- **Funcionamento:** Mantém uma tabela de custos mínimos e usa um _Min-Heap_ para expandir sempre o caminho mais promissor. Reconstrói o caminho final voltando do destino à origem.
 
 ### Resultados da Navegação (Demonstração)
 
 O `main.py` simula um cenário onde ir direto da "Praça" ao "Hospital" tem um custo alto (10 - calçada ruim), mas existe um desvio pela "Prefeitura" com custo baixo (5 + 1).
 
-* **DFS e BFS:** Mapearam com sucesso todos os nós conectados (`A -> B -> C -> D`).
-* **Dijkstra (Resultado Real):**
-    * O algoritmo ignorou o caminho direto (Custo 12).
-    * Encontrou o desvio acessível: **`['A: Entrada', 'B: Praça', 'C: Prefeitura', 'D: Hospital']`**
-    * **`Custo Total de Acessibilidade: 8`**
+- **DFS e BFS:** Mapearam com sucesso todos os nós conectados (`A -> B -> C -> D`).
+- **Dijkstra (Resultado Real):**
+  - O algoritmo ignorou o caminho direto (Custo 12).
+  - Encontrou o desvio acessível: **`['A: Entrada', 'B: Praça', 'C: Prefeitura', 'D: Hospital']`**
+  - **`Custo Total de Acessibilidade: 8`**
 
 ## Desafio — Otimização de Caminho e Processo - Gráfico Avançado
+
 ### Entrega: 19/12
 
 Nesta fase final, o "Acesso Já" ganha capacidades de Gestão Urbana, utilizando algoritmos avançados para resolver problemas complexos de infraestrutura e planejamento.
@@ -146,12 +162,15 @@ Nesta fase final, o "Acesso Já" ganha capacidades de Gestão Urbana, utilizando
 # Análise de Complexidade (Otimização Avançada)
 
 ### Árvore Geradora Mínima (Borůvka): `O(E log V)`
+
 - Eficiente para processamento paralelo. Reduz o número de componentes pela metade a cada passo, convergindo rapidamente.
 
 ### Coloração (Welch-Powell): `O(V^2 + E)`
+
 - Algoritmo guloso. A ordenação dos vértices leva `O(V log V)`, mas a atribuição de cores pode verificar muitos vizinhos no pior caso.
 
 ### Ordenação Topológica (Kahn): `O(V + E)`
+
 - Linear. Visita cada vértice e cada aresta exatamente uma vez. Muito rápido e ideal para resolução de dependências em projetos.
 
 ---
@@ -161,14 +180,82 @@ Nesta fase final, o "Acesso Já" ganha capacidades de Gestão Urbana, utilizando
 O `main.py` executa cenários práticos de gestão, obtendo os seguintes resultados:
 
 ### MST (Reforma de Baixo Custo):
+
 - **Custo Mínimo calculado:** 8.
 - **Rotas selecionadas:** `A <-> B`, `B <-> C`, `C <-> D`.
-- *O algoritmo evitou inteligentemente a rota cara B <-> D (Custo 10), preferindo o desvio mais barato.*
+- _O algoritmo evitou inteligentemente a rota cara B <-> D (Custo 10), preferindo o desvio mais barato._
 
 ### Coloração (Manutenção):
+
 - **Agendamento realizado em 3 dias (cores).**
-- *Garantia de que nenhum local vizinho (ex: Praça e Prefeitura) tenha manutenção no mesmo dia.*
+- _Garantia de que nenhum local vizinho (ex: Praça e Prefeitura) tenha manutenção no mesmo dia._
 
 ### Ordenação Topológica (Obra da Rampa):
+
 - **Cronograma lógico gerado:**
-`['1. Aprovar Projeto', '2. Comprar Material', '3. Demolição', '4. Construir Rampa', '5. Pintura', '6. Inauguração']`
+  `['1. Aprovar Projeto', '2. Comprar Material', '3. Demolição', '4. Construir Rampa', '5. Pintura', '6. Inauguração']`
+
+---
+
+# Fase 4 — A Sabedoria do Guardião (Programação Dinâmica)
+
+### Entrega: 19/02/2026
+
+Nesta etapa final, foi implementada a "inteligência estratégica" do Acesso Já, permitindo que o sistema seja resiliente a falhas humanas de digitação através de algoritmos de otimização de strings.
+
+## Desafio — Busca Inteligente de Destinos (Distância de Edição)
+
+- **Algoritmo:** `calcular_distancia_edicao()` e `corretor_busca_inteligente()`.
+- **Técnica de PD: Tabulação (Bottom-Up)** com preenchimento de matriz.
+- **Cenário no Acesso Já:** Correção ortográfica de locais. Se um usuário com dificuldades motoras ou pressa digitar um destino com erro (ex: "Hospitla"), o sistema não retorna "não encontrado", mas sim a sugestão mais provável do banco de dados de locais do Grafo.
+- **Funcionamento:** O algoritmo calcula o número mínimo de operações (Inserção, Remoção ou Substituição) para transformar a entrada do usuário em um local conhecido. Ele utiliza uma matriz para armazenar os custos de transformação de prefixos, evitando cálculos redundantes e encontrando o "custo global" mínimo.
+
+## Análise de Complexidade (Programação Dinâmica)
+
+### Distância de Edição (Levenshtein): $O(M \times N)$
+
+- Onde M e N são os comprimentos das strings comparadas.
+- **Subestrutura Ótima:** A distância entre duas palavras depende da distância mínima calculada para seus prefixos anteriores na matriz.
+- **Eficiência:** Ao contrário de uma solução recursiva ($O(3^N)$), a Programação Dinâmica por tabulação garante um tempo de execução linear em relação à área da matriz, permitindo sugestões instantâneas.
+
+### Resultados da Otimização (Demonstração Final)
+
+O main.py demonstra a integração total do sistema, onde a Fase 4 utiliza os dados gerados na Fase 3:
+
+### Busca Inteligente (Resultado Real):
+
+- **Locais conhecidos (do Grafo):** ['A: Entrada', 'B: Praça', 'C: Prefeitura', 'D: Hospital'].
+- **Entrada do Usuário:** "Hospitla".
+- **Processamento:** O sistema calculou a distância para todos os vértices do grafo.
+- **Sugestão Gerada:** "Não encontramos 'Hospitla'. Você quis dizer 'D: Hospital'?".
+- **Custo de PD:** 5 operações (considerando o erro e o prefixo do vértice).
+
+---
+
+### 📂 Estrutura do Projeto
+
+Para garantir a organização e modularidade, o software foi dividido nos seguintes arquivos:
+
+- main.py: O motor principal do projeto. Executa as demonstrações integradas de todas as fases.
+- modulo1_buscas.py: Contém as lógicas de busca (Sequencial, Binária e Rabin-Karp).
+- modulo2_huffman.py: Responsável pela compressão e descompressão de textos.
+- modulo3_grafos.py: Define a estrutura de Grafo e todos os algoritmos de rota e otimização urbana.
+- modulo4_pd.py: Implementa o corretor inteligente via Programação Dinâmica.
+
+---
+
+# Conclusão e Considerações Finais
+
+O projeto “Acesso Já” demonstra como estruturas de dados clássicas podem ser aplicadas para resolver problemas reais de inclusão social.
+
+Através da integração de múltiplos algoritmos, conseguimos transformar dados brutos e desorganizados em uma ferramenta capaz de:
+
+- Encontrar informações rapidamente (Buscas);
+- Otimizar o uso de recursos de memória (Huffman);
+- Traçar as rotas mais seguras para pessoas com mobilidade reduzida (Grafos/Dijkstra);
+- Gerir a infraestrutura da cidade (MST/Coloração);
+- Perdoar falhas humanas na interação com o sistema (Programação Dinâmica).
+
+**Nota Final do Projeto:** O "Acesso Já" agora é capaz de buscar dados desorganizados, comprimir relatos para economizar 48% de espaço, mapear a cidade com pesos de acessibilidade, traçar rotas ótimas com Dijkstra e corrigir erros de entrada com Programação Dinâmica.
+
+---
