@@ -1,3 +1,5 @@
+# Main do projeto com os testes
+
 import modulo1_buscas
 import random
 import modulo2_huffman

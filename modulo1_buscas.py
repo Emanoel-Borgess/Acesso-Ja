@@ -2,6 +2,7 @@ import random
 
 # Busca sequêncial
 #percorre a lista comparando cada item com o alvo.
+
 def busca_sequencial(lista, alvo):
     comparacoes = 0
 

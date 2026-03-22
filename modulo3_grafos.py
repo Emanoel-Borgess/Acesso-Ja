@@ -3,6 +3,7 @@ import heapq
 
 # Modela a malha urbana: Vértices (locais), Arestas (ruas) 
 # e Pesos (esforço/custo de acessibilidade).
+
 class Grafo:
     def __init__(self):
         self.vertices = []

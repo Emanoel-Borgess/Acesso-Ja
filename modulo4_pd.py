@@ -1,4 +1,3 @@
-
 # Usa Programação Dinâmica (Tabulação) para calcular o custo mínimo de transformar uma string em outra através de inserção, remoção ou substituição.
 def calcular_distancia_edicao(termo_usuario, termo_banco_dados):
     tamanho_usuario = len(termo_usuario)

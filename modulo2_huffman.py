@@ -2,6 +2,7 @@ import heapq
 # Huffman
 # compressão de dados sem perdas
 # economiza espaço
+
 class No:
     def __init__(self, caractere, frequencia):
         self.caractere = caractere
