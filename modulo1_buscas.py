@@ -1,6 +1,7 @@
 import random
 
 # Busca sequêncial
+#percorre a lista comparando cada item com o alvo.
 def busca_sequencial(lista, alvo):
     comparacoes = 0
 
@@ -11,6 +12,7 @@ def busca_sequencial(lista, alvo):
     return -1, comparacoes
 
 # Busca binária
+# Divide para conquistar
 def busca_binaria(lista_ordenanda, alvo):
     comparacoes = 0
     inicio = 0
@@ -28,8 +30,8 @@ def busca_binaria(lista_ordenanda, alvo):
             fim = meio - 1
     return -1, comparacoes
 
-#### Adicionando o Rabin Karp
 # Rabin Karp
+# busca de strings usando Hash
 def rabin_karp(texto, padrao):
     n = len(texto)
     m = len(padrao)

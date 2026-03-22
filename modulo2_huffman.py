@@ -1,5 +1,7 @@
 import heapq
-
+# Huffman
+# compressão de dados sem perdas
+# economiza espaço
 class No:
     def __init__(self, caractere, frequencia):
         self.caractere = caractere
@@ -10,6 +12,7 @@ class No:
     def __lt__(self, other):
         return self.frequencia < other.frequencia
     
+# Comprime relatos de usuários
 def comprimir(texto):
     frequencias = {}
 

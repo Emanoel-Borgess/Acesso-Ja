@@ -1,6 +1,8 @@
 from collections import deque
 import heapq
 
+# Modela a malha urbana: Vértices (locais), Arestas (ruas) 
+# e Pesos (esforço/custo de acessibilidade).
 class Grafo:
     def __init__(self):
         self.vertices = []
@@ -68,6 +70,8 @@ class Grafo:
                 print(f"{valor:6}", end=" ")
             print("|")
 
+    # Busca em profundidade
+    # Exploração exaustiva para verificar se há conectividade entre dois pontos quaisquer do mapa.
     def buscaDFS(self, origem):
         visitados = set()
         self.dfsRecursivo(origem, visitados)
@@ -80,7 +84,7 @@ class Grafo:
             if vizinho not in visitados:
                 self.dfsRecursivo(vizinho, visitados)
 
-
+    # Identifica vizinhos imediatos e locais próximos por níveis de distância (camadas).
     def buscaBFS(self, origem):
         visitados = set()
         fila = deque([origem])
@@ -97,6 +101,7 @@ class Grafo:
                     visitados.add(vizinho)
                     fila.append(vizinho)
 
+    # Algoritmo guloso que funciona como um GPS.Encontra a rota de menor esforço físico para o usuário.
     def dijkstra(self, origem, destinoFinal):
         distancias = {v: float('inf') for v in self.vertices}
         distancias[origem] = 0
@@ -131,7 +136,7 @@ class Grafo:
 
         return caminho, distancias[destinoFinal]
 
-    # MST - Algoritmo de Borůvka
+    # Encontra a Árvore Geradora Mínima. Utilizado para planejar reformas de calçadas conectando a cidade com custo mínimo.
     def boruvkaMST(self):
         parent = {v: v for v in self.vertices}
         rank = {v: 0 for v in self.vertices}
@@ -197,7 +202,7 @@ class Grafo:
 
         return mst_arestas, custo_total
 
-    # 2. Coloração - Welch-Powell
+    # Atribui "cores" (dias) aos locais. Garante que ruas vizinhas não entrem em manutenção no mesmo dia, evitando bloqueios totais.
     def coloracaoWelchPowell(self):
         verticesOrdenados = sorted(self.vertices, key=lambda v: len(self.listaAdj[v]), reverse=True)
         coresAtribuidas = {}
@@ -216,6 +221,7 @@ class Grafo:
                         coresAtribuidas[vertice] = corAtual
         return coresAtribuidas
 
+    # Define o cronograma lógico de obras. Resolve dependências
     def ordenacaoTopologica(self):
         graus = self.grausEntrada.copy()
         fila = deque([v for v in self.vertices if graus[v] == 0])

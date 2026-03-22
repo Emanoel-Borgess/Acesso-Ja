@@ -256,6 +256,6 @@ Através da integração de múltiplos algoritmos, conseguimos transformar dados
 - Gerir a infraestrutura da cidade (MST/Coloração);
 - Perdoar falhas humanas na interação com o sistema (Programação Dinâmica).
 
-**Nota Final do Projeto:** O "Acesso Já" agora é capaz de buscar dados desorganizados, comprimir relatos para economizar 48% de espaço, mapear a cidade com pesos de acessibilidade, traçar rotas ótimas com Dijkstra e corrigir erros de entrada com Programação Dinâmica.
+**Nota Final do Projeto:** O "Acesso Já" agora é capaz de buscar dados desorganizados, comprimir relatos para economizar 48% de espaço, mapear a cidade com pesos de acessibilidade, traçar rotas ótimas com Dijkstra e corrigir erros de entrada com Programação Dinâmica. Obroigado!.
 
 ---

@@ -1,3 +1,5 @@
+
+# Usa Programação Dinâmica (Tabulação) para calcular o custo mínimo de transformar uma string em outra através de inserção, remoção ou substituição.
 def calcular_distancia_edicao(termo_usuario, termo_banco_dados):
     tamanho_usuario = len(termo_usuario)
     tamanho_banco = len(termo_banco_dados)
@@ -20,6 +22,7 @@ def calcular_distancia_edicao(termo_usuario, termo_banco_dados):
                 tabela_distancias[linha][coluna] = 1 + min(custo_remocao, custo_insercao, custo_substituicao)
     return tabela_distancias[tamanho_usuario][tamanho_banco]
 
+# Compara a entrada do usuário com os vértices do Grafo e sugere o local mais próximo matematicamente, tratando erros de digitação.
 def corretor_busca_inteligente(termo_digitado, lista_locais_conhecidos):
     local_mais_proximo = None
     menor_distancia_encontrada = float('inf')
